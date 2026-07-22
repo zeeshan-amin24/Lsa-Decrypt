@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About me — LSA // Decrypt</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b0d12;
+    --panel:#12151c;
+    --panel-2:#171b24;
+    --border:#232838;
+    --border-soft:#1a1e29;
+    --text:#edeff5;
+    --muted:#8a90a3;
+    --muted-2:#5c6275;
+    --mint:#5eead4;
+    --mint-dim:#3a9c8f;
+    --amber:#ffb86b;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+    line-height:1.5;
+    min-height:100vh;
+  }
+  .mono{font-family:'JetBrains Mono',monospace;}
+  h1,h2,h3{font-family:'Space Grotesk',sans-serif;margin:0;letter-spacing:-0.01em;}
+  a{color:inherit;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 28px;}
+
+  body::before{
+    content:"";
+    position:fixed;inset:0;
+    background:
+      radial-gradient(1100px 620px at 50% -8%, rgba(94,234,212,0.09), transparent 60%),
+      radial-gradient(800px 480px at 90% 30%, rgba(255,184,107,0.05), transparent 55%),
+      radial-gradient(800px 480px at 5% 70%, rgba(94,234,212,0.04), transparent 55%);
+    pointer-events:none;
+    z-index:0;
+  }
+
+ 
+  header.nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(11,13,18,0.82);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border-soft);
+  }
+  .nav-inner{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 28px;max-width:1120px;margin:0 auto;
+  }
+  .logo{
+    display:flex;align-items:center;gap:9px;
+    font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:16px;
+    text-decoration:none;
+  }
+  .logo .dot{width:8px;height:8px;border-radius:50%;background:var(--mint);box-shadow:0 0 10px var(--mint);}
+  .logo .slash{color:var(--muted-2);}
+  .nav-cta{
+    font-size:13px;font-family:'JetBrains Mono',monospace;
+    color:var(--mint);border:1px solid var(--mint-dim);
+    padding:7px 14px;border-radius:999px;text-decoration:none;
+    transition:background .15s;
+    display:inline-flex;align-items:center;gap:6px;
+  }
+  .nav-cta:hover{background:rgba(94,234,212,0.08);}
+
+ 
+  section.about{position:relative;z-index:1;padding:80px 0 110px;}
+  .about-shell{max-width:620px;margin:0 auto;text-align:center;}
+
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.08em;
+    color:var(--amber);text-transform:uppercase;margin-bottom:36px;
+  }
+  .eyebrow::before,.eyebrow::after{content:"";width:16px;height:1px;background:var(--amber);}
+
+  
+  .photo-stage{
+    position:relative;
+    width:220px;height:220px;
+    margin:0 auto 32px;
+  }
+  .photo-glow{
+    position:absolute;inset:-30px;
+    background:radial-gradient(circle, rgba(94,234,212,0.18), transparent 70%);
+    filter:blur(4px);
+    z-index:0;
+  }
+  .photo-ring{
+    position:absolute;inset:-14px;
+    border-radius:50%;
+    border:1.5px dashed var(--mint-dim);
+    opacity:0.55;
+    animation:spin 40s linear infinite;
+    z-index:1;
+  }
+  @keyframes spin{ to{ transform:rotate(360deg); } }
+  .about-photo{
+    position:relative;z-index:2;
+    width:220px;height:220px;border-radius:50%;
+    background:var(--panel-2);border:1px solid var(--border);
+    display:flex;align-items:center;justify-content:center;overflow:hidden;
+    box-shadow:0 20px 60px rgba(0,0,0,0.45);
+  }
+  .about-photo img{width:100%;height:100%;object-fit:cover;display:none;}
+  .about-photo .placeholder{color:var(--muted-2);text-align:center;font-size:11.5px;font-family:'JetBrains Mono',monospace;padding:0 16px;letter-spacing:0.04em;}
+
+  .about-name{font-size:32px;margin-bottom:10px;}
+  .about-role{
+    display:inline-block;
+    color:var(--mint);font-family:'JetBrains Mono',monospace;font-size:13px;
+    border:1px solid var(--mint-dim);background:rgba(94,234,212,0.06);
+    padding:6px 16px;border-radius:999px;margin-bottom:26px;
+  }
+  .about-bio{color:var(--muted);font-size:15.5px;max-width:480px;margin:0 auto 34px;}
+
+  .about-divider{
+    display:flex;align-items:center;gap:14px;
+    color:var(--muted-2);font-family:'JetBrains Mono',monospace;font-size:11px;
+    letter-spacing:0.1em;text-transform:uppercase;
+    margin:0 auto 26px;max-width:480px;
+  }
+  .about-divider::before,.about-divider::after{content:"";flex:1;height:1px;background:var(--border);}
+
+  .about-links{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;}
+  .about-links a{
+    font-size:12.5px;font-family:'JetBrains Mono',monospace;color:var(--muted);
+    border:1px solid var(--border);padding:8px 16px;border-radius:999px;text-decoration:none;
+    transition:all .15s;display:inline-flex;align-items:center;gap:6px;
+  }
+  .about-links a:hover{color:var(--mint);border-color:var(--mint-dim);background:rgba(94,234,212,0.06);transform:translateY(-1px);}
+
+  footer{border-top:1px solid var(--border-soft);padding:26px 0;position:relative;z-index:1;}
+  .footer-inner{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;color:var(--muted-2);flex-wrap:wrap;gap:10px;}
+  .footer-inner a{text-decoration:none;transition:color .15s;}
+  .footer-inner a:hover{color:var(--mint);}
+
+  @media (max-width:640px){
+    .about-name{font-size:26px;}
+    .photo-stage, .about-photo{width:170px;height:170px;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .photo-ring{animation:none;}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="lsa-decryptor.html" class="logo">LSA<span class="slash">//</span>DECRYPT<span class="dot"></span></a>
+    <a href="lsa-decryptor.html" class="nav-cta">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Back to tool
+    </a>
+  </div>
+</header>
+
+<section class="about">
+  <div class="wrap about-shell">
+    <div class="eyebrow">Who built this</div>
+
+  
+    <div class="photo-stage">
+      <div class="photo-glow"></div>
+      <div class="photo-ring"></div>
+      <div class="about-photo">
+        <img src="https://i.postimg.cc/DyMTqskz/Megumi-Fushiguro-(2).jpg" alt="Profile photo" id="aboutPhoto"
+             onload="this.style.display='block'; document.getElementById('aboutPlaceholder').style.display='none';"
+             onerror="this.style.display='none'; document.getElementById('aboutPlaceholder').style.display='flex';">
+        <div class="placeholder" id="aboutPlaceholder">YOUR<br>PHOTO<br>HERE</div>
+      </div>
+    </div>
+
+ 
+    <h1 class="about-name">Zeeshan Amin</h1>
+    <div class="about-role"> Class 10 student · Web Developer</div>
+    <p class="about-bio">
+
+I'm a Class 10 student with a real interest in coding, especially building things for the web. I've put together a bunch of projects over time — this decryptor is one of them, made because I wanted a clean, no-fuss way to get MIUI's Secret Album files back into normal photos and videos.
+    </p>
+
+    <div class="about-divider">Find me</div>
+
+    <div class="about-links">
+   
+      <a href="https://github.com/zeeshan-amin24/">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.5 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.36-3.37-1.36-.46-1.19-1.11-1.51-1.11-1.51-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.04 1.03-2.75-.1-.26-.45-1.31.1-2.73 0 0 .84-.28 2.75 1.05a9.3 9.3 0 0 1 2.5-.35c.85 0 1.7.12 2.5.35 1.91-1.33 2.75-1.05 2.75-1.05.55 1.42.2 2.47.1 2.73.64.71 1.03 1.63 1.03 2.75 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .28.18.61.69.5A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg>
+        GitHub
+      </a>
+      <a href="https://www.instagram.com/zeeshan_amin42/">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07s-3.58-.01-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.15-3.23 1.67-4.77 4.92-4.92 1.27-.06 1.65-.07 4.85-.07zM12 0C8.74 0 8.33.01 7.05.07c-4.35.2-6.78 2.62-6.98 6.98C.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.36-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1 0 18.16 12 6.16 6.16 0 0 0 12 5.84zM12 16a4 4 0 1 1 4-4 4 4 0 0 1-4 4zm6.41-10.85a1.44 1.44 0 1 0 1.44 1.44 1.44 1.44 0 0 0-1.44-1.44z"/></svg>
+        Instagram
+      </a>
+    
+      <a href="mailto:zeeshanamin013@gmail.com">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z" opacity="0"/><path d="M22 6l-10 7L2 6"/><path d="M2 6h20v12H2z"/></svg>
+        Email
+      </a>
+    </div>
+  </div>
+</section>
+
+
+
+</body>
+</html>
